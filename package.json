@@ -1,28 +1,28 @@
 {
-  "name": "orcusjs",
-  "version": "0.0.0",
-  "description": "OrcusJS - DAPI Wrapper",
-  "main": "src/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NotSugden/OrcusJS.git"
-  },
-  "author": "NotSugden",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/NotSugden/OrcusJS/issues"
-  },
-  "homepage": "https://github.com/NotSugden/OrcusJS#readme",
-  "dependencies": {
-    "@types/node": "^14.6.2",
-    "typescript": "^4.0.2"
-  },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^3.10.1",
-    "@typescript-eslint/parser": "^3.10.1",
-    "eslint": "^7.7.0"
-  }
+	"name": "orcusjs",
+	"version": "0.0.0",
+	"description": "OrcusJS - DAPI Wrapper",
+	"main": "src/index.js",
+	"scripts": {
+		"build": "tsc"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/NotSugden/OrcusJS.git"
+	},
+	"author": "NotSugden",
+	"license": "Apache-2.0",
+	"bugs": {
+		"url": "https://github.com/NotSugden/OrcusJS/issues"
+	},
+	"homepage": "https://github.com/NotSugden/OrcusJS#readme",
+	"dependencies": {
+		"@types/node": "^14.6.2",
+		"typescript": "^4.0.2"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^3.10.1",
+		"@typescript-eslint/parser": "^3.10.1",
+		"eslint": "^7.7.0"
+	}
 }
