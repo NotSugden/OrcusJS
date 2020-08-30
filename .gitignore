@@ -1,2 +1,7 @@
 # Dependency directories
 node_modules/
+
+# Build output
+build/
+
+package-lock.json
