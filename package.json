@@ -4,7 +4,7 @@
 	"description": "OrcusJS - DAPI Wrapper",
 	"main": "src/index.js",
 	"scripts": {
-		"prepare": "npm run build",
+		"postinstall": "npm run build",
 		"build": "tsc"
 	},
 	"repository": {
