@@ -1,9 +1,10 @@
 import { RequestManager } from '../rest';
 import { Util, Constants } from '../util';
 import { EventEmitter } from 'events';
+import { buildRoute, Route } from '../rest/buildRoute';
 
 export class Client extends EventEmitter {
-	private requestManager: RequestManager;
+	public requestManager: RequestManager;
 
 	public token!: string | null;
 	public options: ClientOptions;
@@ -18,6 +19,10 @@ export class Client extends EventEmitter {
 			}
 		);
 		this.requestManager = new RequestManager(this);
+	}
+
+	public get api(): Route {
+		return buildRoute(this);
 	}
 }
 

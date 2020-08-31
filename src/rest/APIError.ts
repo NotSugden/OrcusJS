@@ -12,14 +12,14 @@ export default class APIError extends Error {
 	) {
 		super();
 		this.name = 'APIError';
-		this.message = APIError.resolveError(data.errors);
-		this.code = <number> <unknown> data.code;
+		this.message = data.errors ? APIError.resolveError(data.errors) : data.message;
+		this.code = data.code;
 		this.endpoint = endpoint;
 		this.bucket = bucket;
 		this.httpStatus = statusCode;
 	}
 
-	static resolveError(rawError: RawAPIError['errors'], props: string[] = []): string {
+	static resolveError(rawError: Exclude<RawAPIError['errors'], undefined>, props: string[] = []): string {
 		const messages: string[] = [];
 		for (const [key, value] of Object.entries(rawError)) {
 			const int = parseInt(key);
@@ -42,7 +42,7 @@ interface BaseError {
 export interface RawAPIError {
 	code: number;
 	message: string;
-	errors: {
+	errors?: {
 		[key: string]: {
 			_errors: BaseError[];
 		} | {

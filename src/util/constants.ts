@@ -176,3 +176,11 @@ export enum WebhookType {
 	INCOMING = 1,
 	CHANNEL_FOLLOWER = 2
 }
+
+export enum RequestMethod {
+	GET = 'GET',
+	DELETE = 'DELETE',
+	PATCH = 'PATCH',
+	PUT = 'PUT',
+	POST = 'POST'
+}
