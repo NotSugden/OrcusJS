@@ -1,11 +1,23 @@
+import { ClientOptions } from '../client';
+
 export const API_URL = 'http://discord.com/api';
 export const API_VERSION = 7;
+export const GATEWAY_VERSION = 6;
 
-export const DEFAULT_CLIENT_OPTIONS = {
+export const DEFAULT_CLIENT_OPTIONS: ClientOptions = {
 	rest: {
 		requestOffset: 500,
 		timeout: 20 * 1000
+	},
+	gateway: {
+		largeThreshold: 200
 	}
+};
+
+const mirror = <T extends string>(array: T[]) => {
+	const obj = <Record<T, T>> {};
+	for (const key of array) obj[key] = key;
+	return obj;
 };
 
 export enum AuditLogEvent {
@@ -177,10 +189,53 @@ export enum WebhookType {
 	CHANNEL_FOLLOWER = 2
 }
 
-export enum RequestMethod {
-	GET = 'GET',
-	DELETE = 'DELETE',
-	PATCH = 'PATCH',
-	PUT = 'PUT',
-	POST = 'POST'
+export const RequestMethod = mirror(['GET', 'DELETE', 'PATCH', 'PUT', 'POST']);
+export type RequestMethod = keyof typeof RequestMethod;
+
+export enum GatewayStatus {
+	NOT_CONNECTED = 0,
+	CONNECTING = 1,
+	DISCONNECTED = 2,
+	RECONNECTING = 3,
+	CONNECTED = 4
 }
+
+export enum OPCode {
+	DISPATCH = 0,
+	HEARTBEAT = 1,
+	IDENTIFY = 2,
+	PRESENCE_UPDATE = 3,
+	VOICE_STATE_UPDATE = 4,
+	RESUME = 6,
+	RECONNECT = 7,
+	REQUEST_GUILD_MEMBERS = 8,
+	INVALID_SESSION = 9,
+	HELLO = 10,
+	HEARTBEAT_ACK = 11
+}
+
+export enum PresenceStatus {
+	ONLINE = 'online',
+	DND = 'dnd',
+	IDLE = 'idle',
+	INVISIBLE = 'invisible',
+	OFFLINE = 'offlne'
+}
+
+export enum ActivityType {
+	GAME = 0,
+	STREAMING = 1,
+	LISTENING = 2,
+	CUSTOM = 4
+}
+
+export const WSEventType = mirror([
+	'READY', 'CHANNEL_CREATE', 'CHANNEL_UPDATE', 'CHANNEL_DELETE', 'CHANNEL_PINS_UPDATE',
+	'GUILD_CREATE', 'GUILD_UPDATE', 'GUILD_DELETE', 'GUILD_BAN_ADD', 'GUILD_BAN_REMOVE',
+	'GUILD_EMOJIS_UPDATE', 'GUILD_INTEGRATIONS_UPDATE', 'GUILD_MEMBER_ADD', 'GUILD_MEMBER_REMOVE',
+	'GUILD_MEMBER_UPDATE', 'GUILD_MEMBERS_CHUNK', 'GUILD_ROLE_CREATE', 'GUILD_ROLE_UPDATE',
+	'GUILD_ROLE_DELETE', 'INVITE_CREATE', 'INVITE_DELETE', 'MESSAGE_CREATE', 'MESSAGE_UPDATE',
+	'MESSAGE_DELETE', 'MESSAGE_DELETE_BULK', 'MESSAGE_REACTION_ADD', 'MESSAGE_REACTION_REMOVE',
+	'MESSAGE_REACTION_REMOVE_ALL', 'MESSAGE_REACTION_REMOVE_EMOJI', 'PRESENCE_UPDATE',
+	'TYPING_START', 'USER_UPDATE', 'VOICE_STATE_UPDATE', 'VOICE_SERVER_UPDATE', 'WEBHOOKS_UPDATE'
+]);

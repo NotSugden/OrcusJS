@@ -1,7 +1,11 @@
 export * as Constants from './constants';
 
+type Partialize<T extends object> = {
+	[K in keyof T]?: T[K] extends object ? Partialize<T[K]> : T[K];
+}
+
 export class Util {
-	static mergeDefaults<T extends object>(toMerge: Partial<T>, defaults: T): T {
+	static mergeDefaults<T extends object>(toMerge: Partialize<T>, defaults: T): T {
 		for (const [key, _default] of Object.entries(defaults)) {
 			const typeofDefault = typeof _default;
 			const typeofGiven = typeof toMerge[<keyof T> key];
