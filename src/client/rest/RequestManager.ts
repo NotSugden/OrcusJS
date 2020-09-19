@@ -1,10 +1,9 @@
-import { Client } from '../client';
+import Client from '../Client';
 import { promisify } from 'util';
-import { Constants } from '../util';
 import fetch, { Response } from 'node-fetch';
 import APIError from './APIError';
 import HTTPError from './HTTPError';
-import { RequestMethod } from '../util/constants';
+import { Constants, RequestMethod } from '../../util';
 import { MethodRequestOptions } from './buildRoute';
 const sleep = promisify(setTimeout);
 

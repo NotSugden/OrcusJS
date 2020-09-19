@@ -1,6 +1,6 @@
 // inspired by discord.js https://github.com/discordjs/discord.js/blob/b0ab37ddc0614910e032ccf423816e106c3804e5/src/rest/APIRouter.js#L1
-import { Client } from '../client';
-import { RequestMethod } from '../util/constants';
+import Client from '../Client';
+import { Constants, RequestMethod } from '../../util';
 import { RequestOptions } from './RequestManager';
 
 const ID_REGEX = /^\d{16,19}$/;
@@ -36,7 +36,7 @@ export const buildRoute = (client: Client): Route => {
 		get(_, endpoint) {
 			endpoint = endpoint.toString();
 			const uppercaseEndpoint = endpoint.toUpperCase();
-			if (uppercaseEndpoint in RequestMethod) {
+			if (uppercaseEndpoint in Constants.RequestMethods) {
 				return (options?: MethodRequestOptions) => new Promise(
 					(resolve, reject) => client.requestManager.makeRequest(
 						<RequestMethod> uppercaseEndpoint, Object.assign({}, options || {}, <RequestOptions> {
