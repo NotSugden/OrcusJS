@@ -1,7 +1,16 @@
 export * as Constants from './constants';
+export * from './types';
 
-export class Util {
-	static mergeDefaults<T extends object>(toMerge: Partial<T>, defaults: T): T {
+type Partialize<T extends object> = {
+	[K in keyof T]?: T[K] extends object ? Partialize<T[K]> : T[K];
+}
+
+export default class Util {
+	static resolveAvatarFormat(hash: string): string {
+		return hash.startsWith('a_') ? 'gif' : 'webp';
+	}
+
+	static mergeDefaults<T extends object>(toMerge: Partialize<T>, defaults: T): T {
 		for (const [key, _default] of Object.entries(defaults)) {
 			const typeofDefault = typeof _default;
 			const typeofGiven = typeof toMerge[<keyof T> key];

@@ -1,9 +1,10 @@
-import { Client } from '../client';
+import Client from '../Client';
 import { promisify } from 'util';
-import { Constants } from '../util';
 import fetch, { Response } from 'node-fetch';
 import APIError from './APIError';
 import HTTPError from './HTTPError';
+import { Constants, RequestMethod } from '../../util';
+import { MethodRequestOptions } from './buildRoute';
 const sleep = promisify(setTimeout);
 
 const parse = (response: Response) => {
@@ -125,14 +126,10 @@ export interface RequestBucket {
 	busy: boolean
 }
 
-export interface RequestOptions {
-	data?: Record<string, unknown>;
-	query?: Record<string, string> | URLSearchParams;
-	reason?: string;
+
+export interface RequestOptions extends MethodRequestOptions {
 	endpoint: string;
 	bucket: string;
 	resolve: (res: unknown) => void;
 	reject: (error: Error) => void;
 }
-
-export type RequestMethod = 'GET' | 'DELETE' | 'PATCH' | 'POST'
